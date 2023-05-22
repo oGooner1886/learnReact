@@ -1,7 +1,8 @@
 import './App.css';
-import ContentProfile from './components/ContentProfile';
-import Header from './components/Header';
-import Navigation from './components/Navigation';
+
+import ContentProfile from './components/ContentProfile/ContentProfile';
+import Header from './components/Header/Header';
+import Navigation from './components/Nav/Navigation';
 
 
 

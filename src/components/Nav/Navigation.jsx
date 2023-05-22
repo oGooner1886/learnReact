@@ -1,23 +1,24 @@
+import s from './Navigation.module.css'
 const Navigation = () => {
     return (
-        <nav className = 'nav'>
-        <div>
-          <a href = '#'>
+        <nav className = {s.nav}>
+        <div className= {s.item}>
+          <a>
             Profile
           </a>
         </div>
-        <div>
-          <a href = '#'>
+        <div className={s.item}>
+          <a>
             Messages
           </a>
         </div>
-        <div>
-          <a href = '#'>
+        <div className={s.item}>
+          <a>
             News
           </a>
         </div>
-        <div>
-          <a href = '#'>
+        <div className={s.item}>
+          <a>
             Music
           </a>
         </div>

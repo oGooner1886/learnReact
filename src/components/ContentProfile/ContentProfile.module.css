@@ -1,0 +1,13 @@
+
+.content{
+    grid-area: c;
+    background-color: #e1f3cb;
+  }
+  .zxc{
+    width: 100%;
+    height: 300px;
+  }
+  .avatar{
+    width: 100px;
+    height: 100px;
+  }
