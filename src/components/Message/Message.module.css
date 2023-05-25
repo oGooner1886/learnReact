@@ -1,0 +1,15 @@
+.message{
+    display: grid;
+    grid-template: 1fr/ 1fr 1fr;
+}
+
+.dialogs_left{
+    background-color: skyblue;
+    border: 1px black solid;
+}
+
+.dialogs_right{
+    background-color: skyblue;
+    border: 1px rgb(255, 0, 0) solid;
+    
+}

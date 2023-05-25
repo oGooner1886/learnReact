@@ -3,23 +3,28 @@ const Navigation = () => {
     return (
         <nav className = {s.nav}>
         <div className= {s.item}>
-          <a>
+          <a href='/profile'>
             Profile
           </a>
         </div>
         <div className={s.item}>
-          <a>
-            Messages
+          <a href='/message'>
+            Message
           </a>
         </div>
         <div className={s.item}>
-          <a>
+          <a href='/news'>
             News
           </a>
         </div>
         <div className={s.item}>
-          <a>
+          <a href='/music'>
             Music
+          </a>
+        </div>
+        <div className={s.item}>
+          <a href='/settings'>
+            Settings
           </a>
         </div>
       </nav>
