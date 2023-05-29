@@ -1,0 +1,27 @@
+.message{
+    display: grid;
+    grid-template: 1fr/ 1fr 1fr;
+    gap: 10px;
+    
+}
+
+.messageUsers{
+    background-color: skyblue;
+    
+}
+.user{
+
+}
+.messageUsers .active {
+    color: rgb(55, 0, 255);
+    background-color: aqua;
+}
+
+.messageDialogs{
+    background-color: skyblue;
+    
+    
+}
+.dialog{
+
+}
