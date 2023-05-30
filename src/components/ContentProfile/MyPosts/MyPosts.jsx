@@ -1,27 +1,31 @@
+import React from "react";
 import s from "./MyPosts.module.css";
 import Post from "./Post/Post";
 
+const MyPosts = (props) => {
+  
+  const postsElement = props.posts.map((post) => (
+    <Post id={post.id} message={post.message} valueLike={post.valueLike} />
+  ));
 
-const postData = [
-  {id: 1, message: 'Hi how are you?', valueLike: 10},
-  {id: 2, message: 'Fine, and you?', valueLike: 15},
-]
+  const newPostElement = React.createRef()
+  const addPost = () => {
+    const text = newPostElement.current.value 
+    alert(text)
+  }
 
-
-const MyPosts = () => {
   return (
     <div className={s.posts}>
       <h3>My Posts</h3>
       <div>
-        <textarea className={s.textPost}></textarea>
         <div>
-          <button>Add Post</button>
+          <textarea ref={newPostElement} className={s.textPost}></textarea>
+        </div>
+        <div>
+          <button onClick={addPost}>Add Post</button>
         </div>
       </div>
-      <div className={s.post}>
-        <Post id={postData[0].id} message={postData[0].message} valueLike={postData[0].valueLike} />
-        <Post id={postData[1].id} message={postData[1].message} valueLike={postData[1].valueLike} />
-      </div>
+      <div className={s.post}>{postsElement}</div>
     </div>
   );
 };

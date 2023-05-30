@@ -28,6 +28,11 @@ const Navigation = () => {
             Settings
           </NavLink>
         </div>
+        <div className={s.item}>
+          <NavLink to='/settings' className= {({isActive}) => isActive ? s.active : s.item}>
+            Friends
+          </NavLink>
+        </div>
       </nav>
     )
 }
