@@ -1,10 +1,11 @@
+import { rerenderPage } from "../render";
 const state = {
   profilePage: {
     posts: [
       { id: 1, message: "Hi how are you?", valueLike: 10 },
       { id: 2, message: "Fine, and you?", valueLike: 15 },
     ],
-    
+    newPostText: 'text',
   },
 
   messagePage: {
@@ -20,5 +21,23 @@ const state = {
       ],
   },
 };
+
+export const addPost = () => {
+  
+  const newPost = {
+    id: 5,
+    message: state.profilePage.newPostText,
+    valueLike: 0,
+  }
+  state.profilePage.posts.push(newPost)
+  state.profilePage.newPostText = ''
+  rerenderPage(state)
+}
+
+export const updateNewPostText = (newText) => {
+  state.profilePage.newPostText = newText
+  rerenderPage(state)
+}
+
 
 export default state;
