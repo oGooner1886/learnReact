@@ -1,26 +1,37 @@
-.nav{
+.nav {
     grid-area: n;
     text-align: center;
     background-color: #f1f1f1;
     font-size: 20px;
-}
-
-.item{
+    background: #FFFFFF;
     text-decoration: none;
-    padding: 10px;
-    color: #000000;
+
 }
 
-.nav :hover{
-    background-color: #555;
-    color: white;
+.logo {
+    width: 100px;
+    position: relative;
+    padding-top: 15px;
+    margin-bottom: 35px;
 }
-.item .active{
-    color: rgb(153, 1, 1);
+
+.item {
+    text-decoration: none;
+    padding-bottom: 20px;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 150%;
+    color: #324552;
+}
+
+.nav a:hover{
     font-weight: bold;
-    display: block;
-    text-decoration: none;
+    transition: .2s;
 }
-.item:nth-child(5){
-    margin-top: 50px;
+
+.item .active{
+    font-weight: bold;
+    text-decoration: none;
+    color: #000000;
 }

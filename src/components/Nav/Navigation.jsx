@@ -3,6 +3,10 @@ import s from './Navigation.module.css'
 const Navigation = () => {
     return (
         <nav className = {s.nav}>
+          <div>
+            <img className={s.logo} src = 'https://storage.needpix.com/rsynced_images/logo-3266214_1280.png' />
+            
+          </div>
         <div className= {s.item}>
           <NavLink to='/profile' className= {({isActive}) => isActive ? s.active : s.item}>
             Profile
@@ -28,11 +32,11 @@ const Navigation = () => {
             Settings
           </NavLink>
         </div>
-        <div className={s.item}>
+        {/* <div className={s.item}>
           <NavLink to='/settings' className= {({isActive}) => isActive ? s.active : s.item}>
             Friends
           </NavLink>
-        </div>
+        </div> */}
       </nav>
     )
 }

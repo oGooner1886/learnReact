@@ -1,13 +1,23 @@
 import s from "./ProfileInfo.module.css";
+import cover from "./2-Inverno-min.jpg"
 const ProfileInfo = () => {
   return (
-    <div>
-      <div>
+    <div className={s.profileHeader}>
+      <div className={s.ownerPageCover}>
         <img
-          className={s.zxc}
-          src="https://posekretyvsemysvety.ru/wp-content/uploads/2021/05/cropped-7492.png"
+          className={s.content_background}
+          src={cover}
         ></img>
       </div>
+      <div className={s.profileHeader_info}>
+        
+      </div>
+
+
+
+
+
+
       Main content
       <div>
         <img

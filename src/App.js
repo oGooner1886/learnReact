@@ -8,8 +8,6 @@ import Music from "./components/Music/Music";
 import News from "./components/News/News";
 import Settings from "./components/Settings/Settings";
 
-
-
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 function App(props) {
@@ -21,23 +19,21 @@ function App(props) {
         <Routes>
           <Route
             path="/profile"
-            element={<ContentProfile 
-              profilePage={props.state.profilePage} 
-              addPost={props.addPost} 
-              updateNewPostText={props.updateNewPostText}/>}
+            element={
+              <ContentProfile
+                profilePage={props.state.profilePage}
+                addPost={props.addPost}
+                updateNewPostText={props.updateNewPostText}
+              />
+            }
           />
           <Route
             path="/message"
-            element={
-              <Messages
-                state={props.state.messagePage}
-              />
-            }
+            element={<Messages state={props.state.messagePage} />}
           />
           <Route path="/news" element={<News />} />
           <Route path="/music" element={<Music />} />
           <Route path="/settings" element={<Settings />} />
-          
         </Routes>
       </div>
     </BrowserRouter>

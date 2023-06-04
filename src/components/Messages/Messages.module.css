@@ -1,12 +1,10 @@
 .message{
     display: grid;
     grid-template: 1fr/ 1fr 1fr;
-    gap: 10px;
-    
 }
 
 .messageUsers{
-    background-color: skyblue;
+    /* background-color: skyblue; */
     
 }
 .user{
@@ -18,7 +16,7 @@
 }
 
 .messageDialogs{
-    background-color: skyblue;
+    /* background-color: skyblue; */
     padding-left: 5px;
     
     
