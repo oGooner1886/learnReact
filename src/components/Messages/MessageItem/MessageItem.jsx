@@ -15,10 +15,7 @@ const MessageItem = (props) => {
       <ul>
         <li>{props.value}</li>
       </ul>
-      <div className={s.messageItem_send}>
-        <textarea ref={newMessageElement}></textarea>
-        <button className={s.messageItem_btn} onClick={addMessage}>Send</button>
-      </div>
+      <div className={s.messageItem_send}></div>
     </div>
   );
 };

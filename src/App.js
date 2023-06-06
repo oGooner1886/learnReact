@@ -9,6 +9,8 @@ import News from "./components/News/News";
 import Settings from "./components/Settings/Settings";
 
 import { BrowserRouter, Route, Routes } from "react-router-dom";
+import store from './redux/state';
+
 
 function App(props) {
   return (
@@ -22,14 +24,15 @@ function App(props) {
             element={
               <ContentProfile
                 profilePage={props.state.profilePage}
-                addPost={props.addPost}
-                updateNewPostText={props.updateNewPostText}
+                dispatch={props.dispatch}
+                
               />
             }
           />
           <Route
             path="/message"
-            element={<Messages state={props.state.messagePage} />}
+            element={<Messages state={props.state.messagePage}
+            store = {props.store} />}
           />
           <Route path="/news" element={<News />} />
           <Route path="/music" element={<Music />} />
@@ -41,3 +44,4 @@ function App(props) {
 }
 
 export default App;
+
