@@ -1,22 +1,21 @@
 import s from "./Messages.module.css";
 import MessageItem from "./MessageItem/MessageItem";
 import UserItem from "./UserItem/UserItem";
-import { sendMessageCreator, updateNewMessageBodyCreator } from "../../redux/state";
+import { sendMessageCreator, updateNewMessageBodyCreator } from './../../redux/messageReducer';
 const Messages = (props) => {
   
-  // const state = props.store.getState().messagePage
+  const state = props.store.getState().messagePage
   
-  
-  const usersElements = props.state.users.map((user) => (
+  const usersElements = state.users.map((user) => (
     <UserItem name={user.name} id={user.id} />
   ));
 
-  const messagesElements = props.state.messages.map((message) => (
+  const messagesElements = state.messages.map((message) => (
     <MessageItem value={message.value} />
   ));
 
   
-  const newMessageBody = props.state.newMessageBody
+  const newMessageBody = state.newMessageBody
 
   const onNewMessageChange = (event) => {
     const body = event.target.value

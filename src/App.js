@@ -9,10 +9,11 @@ import News from "./components/News/News";
 import Settings from "./components/Settings/Settings";
 
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import store from './redux/state';
+import store from './redux/store';
 
 
 function App(props) {
+  
   return (
     <BrowserRouter>
       <div className="app-wrapper">
