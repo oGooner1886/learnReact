@@ -9,13 +9,15 @@ import sidebarReducer from './sidebarReducer';
 //     messagePage: messageReducer,
 //     sidebar: sidebarReducer,
 // }
+// const store = configureStore({reducer})
+
 const reducers = combineReducers({
     profilePage : profileReducer,
     messagePage: messageReducer,
     sidebar: sidebarReducer,
 })
 
-// const store = configureStore({reducer})
+
 const store = createStore(reducers)
 
 

@@ -9,11 +9,9 @@ import News from "./components/News/News";
 import Settings from "./components/Settings/Settings";
 
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import store from './redux/store';
-
+import MessagesContainer from "./components/Messages/MessagesContainer";
 
 function App(props) {
-  
   return (
     <BrowserRouter>
       <div className="app-wrapper">
@@ -24,16 +22,20 @@ function App(props) {
             path="/profile"
             element={
               <ContentProfile
-                profilePage={props.state.profilePage}
-                dispatch={props.dispatch}
-                
+                // profilePage={props.state.profilePage}
+                // dispatch={props.dispatch}
+                // store={props.store}
               />
             }
           />
           <Route
             path="/message"
-            element={<Messages state={props.state.messagePage}
-            store = {props.store} />}
+            element={
+              <MessagesContainer
+                // state={props.state.messagePage}
+                // store={props.store}
+              />
+            }
           />
           <Route path="/news" element={<News />} />
           <Route path="/music" element={<Music />} />
@@ -45,4 +47,3 @@ function App(props) {
 }
 
 export default App;
-
