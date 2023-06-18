@@ -29,9 +29,8 @@ export const rerenderPage = (state) => {
 //   rerenderPage(state);
 // });
 rerenderPage()
-store.subscribe(() => {
-  rerenderPage()
-})
 
-
+// store.subscribe(() => {
+//   rerenderPage()
+// })
 // reportWebVitals();

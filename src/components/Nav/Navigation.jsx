@@ -12,6 +12,11 @@ const Navigation = () => {
             Profile
           </NavLink>
         </div>
+        <div className= {s.item}>
+          <NavLink to='/users' className= {({isActive}) => isActive ? s.active : s.item}>
+            Users
+          </NavLink>
+        </div>
         <div className={s.item}>
           <NavLink to='/message' className= {({isActive}) => isActive ? s.active : s.item}>
             Message

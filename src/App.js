@@ -10,6 +10,7 @@ import Settings from "./components/Settings/Settings";
 
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import MessagesContainer from "./components/Messages/MessagesContainer";
+import UsersContainer from "./components/Users/UsersContainer";
 
 function App(props) {
   return (
@@ -22,9 +23,9 @@ function App(props) {
             path="/profile"
             element={
               <ContentProfile
-                // profilePage={props.state.profilePage}
-                // dispatch={props.dispatch}
-                // store={props.store}
+              // profilePage={props.state.profilePage}
+              // dispatch={props.dispatch}
+              // store={props.store}
               />
             }
           />
@@ -32,12 +33,13 @@ function App(props) {
             path="/message"
             element={
               <MessagesContainer
-                // state={props.state.messagePage}
-                // store={props.store}
+              // state={props.state.messagePage}
+              // store={props.store}
               />
             }
           />
           <Route path="/news" element={<News />} />
+          <Route path="/users" element={<UsersContainer />} />
           <Route path="/music" element={<Music />} />
           <Route path="/settings" element={<Settings />} />
         </Routes>

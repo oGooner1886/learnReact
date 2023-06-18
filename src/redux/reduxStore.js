@@ -2,6 +2,7 @@ import { combineReducers, configureStore, createStore } from '@reduxjs/toolkit'
 import profileReducer from './profileReducer';
 import messageReducer from './messageReducer';
 import sidebarReducer from './sidebarReducer';
+import usersReducer from './usersReducer';
 
 
 // const reducer = {
@@ -15,12 +16,13 @@ const reducers = combineReducers({
     profilePage : profileReducer,
     messagePage: messageReducer,
     sidebar: sidebarReducer,
+    usersPage: usersReducer,
 })
 
 
 const store = createStore(reducers)
 
-
+window.store = store
 export default store
 
 
