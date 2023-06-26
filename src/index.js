@@ -11,7 +11,7 @@ const root = ReactDOM.createRoot(document.getElementById("root"));
 
 export const rerenderPage = (state) => {
   root.render(
-    <React.StrictMode>
+    // <React.StrictMode>
       <Provider store={store}>
         <App
           // state={state}
@@ -19,7 +19,7 @@ export const rerenderPage = (state) => {
           // store={store}
         />
       </Provider>
-    </React.StrictMode>
+    // </React.StrictMode>
   );
 };
 // rerenderPage(store.getState());

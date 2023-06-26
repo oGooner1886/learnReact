@@ -4,28 +4,28 @@ const SET_USERS = "SET-USERS"
 
 const initialState = {
   users: [
-    {
-      id: 1,
-      avaImg: "https://w7.pngwing.com/pngs/364/361/png-transparent-account-avatar-profile-user-avatars-icon.png",
-      followed: false,
-      name: "Sergey",
-      status: "Hello, add me",
-      location: { country: "Russia", city: "Astrakhan" },
-    },
-    {
-      id: 2,
-      followed: true,
-      name: "Veronika",
-      status: "Hello, please add me",
-      location: { country: "Russia", city: "Astrakhan" },
-    },
-    {
-      id: 3,
-      followed: true,
-      name: "Liza",
-      status: "Hello, please add me",
-      location: { country: "Russia", city: "Astrakhan" },
-    },
+    // {
+    //   id: 1,
+    //   avaImg: "https://w7.pngwing.com/pngs/364/361/png-transparent-account-avatar-profile-user-avatars-icon.png",
+    //   followed: false,
+    //   name: "Sergey",
+    //   status: "Hello, add me",
+    //   location: { country: "Russia", city: "Astrakhan" },
+    // },
+    // {
+    //   id: 2,
+    //   followed: true,
+    //   name: "Veronika",
+    //   status: "Hello, please add me",
+    //   location: { country: "Russia", city: "Astrakhan" },
+    // },
+    // {
+    //   id: 3,
+    //   followed: true,
+    //   name: "Liza",
+    //   status: "Hello, please add me",
+    //   location: { country: "Russia", city: "Astrakhan" },
+    // },
   ],
 };
 
