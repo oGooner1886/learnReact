@@ -1,10 +1,13 @@
 import { connect } from "react-redux"
-import { followActionCreator, setUsersActionCreator, unfollowActionCreator } from "../../redux/usersReducer"
+import { followActionCreator, setCurrentPageActionCreator, setUsersActionCreator, setUsersTotalCountActionCreator, unfollowActionCreator } from "../../redux/usersReducer"
 import Users from "./Users"
 
 const mapStateToProps = (state) => { //функция которая принимает весь стейт, и возвращает объект со списком пользователей
     return {
-        users: state.usersPage.users
+        users: state.usersPage.users,
+        pageSize: state.usersPage.pageSize,
+        totalUsersCount: state.usersPage.totalUsersCount,
+        currentPage: state.usersPage.currentPage,
     }
 }  
 
@@ -18,6 +21,12 @@ const mapDispatchToProps = (dispatch) => {  //функция которая пе
         },
         setUsers: (users) => {
             dispatch(setUsersActionCreator(users))
+        },
+        setCurrentPage: (pageNumber) => {
+            dispatch(setCurrentPageActionCreator(pageNumber))
+        },
+        setTotalUsersCount: (totalCount) => {
+            dispatch(setUsersTotalCountActionCreator(totalCount))
         }
     }
 }

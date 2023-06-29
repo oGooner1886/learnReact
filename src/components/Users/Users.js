@@ -1,119 +1,109 @@
 import axios from "axios";
-import s from "./Users.module.css";
+import styles from "./Users.module.css";
 import ava from "../../assets/images/ava_default.png";
 import React from "react";
-
-// const Users = (props) => {
-//   if (props.users.length === 0) {
-//     axios
-//       .get("https://social-network.samuraijs.com/api/1.0/users")
-//       .then((response) => {
-//         props.setUsers(response.data.items);
-//       });
-//   }
-
-//   return (
-//     <div>
-//       {props.users.map((user) => (
-//         <div key={user.id}>
-//           <span>
-//             <div>
-//               <img src={ user.photos.small != null ? user.photos.small : ava} className={s.ava}></img>
-//             </div>
-//             <div>
-//               {user.followed ? (
-//                 <button
-//                   onClick={() => {
-//                     props.unfollow(user.id);
-//                   }}
-//                 >
-//                   Unfollow
-//                 </button>
-//               ) : (
-//                 <button
-//                   onClick={() => {
-//                     props.follow(user.id);
-//                   }}
-//                 >
-//                   Follow
-//                 </button>
-//               )}
-//             </div>
-//           </span>
-//           <span>
-//             <span>
-//               <div>{user.name}</div>
-//               <div>{user.status}</div>
-//             </span>
-//             <span>
-//               <div>{"user.location.country"}</div>
-//               <div>{"user.location.city"}</div>
-//             </span>
-//           </span>
-//         </div>
-//       ))}
-//     </div>
-//   );
-// };
 
 class Users extends React.Component {
   constructor(props) {
     super(props);
-    axios
-          .get("https://social-network.samuraijs.com/api/1.0/users")
-          .then((response) => {
-            this.props.setUsers(response.data.items);
-          });
   }
-    
+  componentDidMount() {
+    axios
+      .get(
+        `https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`
+      )
+      .then((response) => {
+        this.props.setUsers(response.data.items);
+      });
+  }
   
-    render() {
-      return (
+  onPageChanged = (pageNumber) => {
+    this.props.setCurrentPage(pageNumber);
+    axios
+      .get(
+        `https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&count=${this.props.pageSize}`
+      )
+      .then((response) => {
+        this.props.setUsers(response.data.items);
+        this.props.setTotalUsersCount(response.data.totalCount);
+      });
+  }
+
+  render() {
+    const pagesCount = Math.ceil(
+      this.props.totalUsersCount / this.props.pageSize
+    );
+    const pages = [];
+    for (let i = 1; i <= pagesCount; i++) {
+      pages.push(i);
+    }
+    return (
+      <div>
         <div>
-          {this.props.users.map((user) => (
-            <div key={user.id}>
-              <span>
-                <div>
-                  <img
-                    src={user.photos.small != null ? user.photos.small : ava}
-                    className={s.ava}
-                  ></img>
-                </div>
-                <div>
-                  {user.followed ? (
-                    <button
-                      onClick={() => {
-                        this.props.unfollow(user.id);
-                      }}
-                    >
-                      Unfollow
-                    </button>
-                  ) : (
-                    <button
-                      onClick={() => {
-                        this.props.follow(user.id);
-                      }}
-                    >
-                      Follow
-                    </button>
-                  )}
-                </div>
+          {pages.map((page) => {
+            return (
+              <span
+                className={
+                  this.props.currentPage === page ? styles.selectedPage : ""
+                }
+                onClick={(event) => {
+                  this.onPageChanged(page)
+                }}
+              >
+                {page}
               </span>
-              <span>
-                <span>
-                  <div>{user.name}</div>
-                  <div>{user.status}</div>
-                </span>
-                <span>
-                  <div>{"user.location.country"}</div>
-                  <div>{"user.location.city"}</div>
-                </span>
-              </span>
-            </div>
-          ))}
+            );
+          })}
+
+          {/* <span>2</span>
+          <span>3</span>
+          <span>4</span>
+          <span>5</span> */}
         </div>
-      );
-    };
-  
+
+        {this.props.users.map((user) => (
+          <div key={user.id}>
+            <span>
+              <div>
+                <img
+                  src={user.photos.small != null ? user.photos.small : ava}
+                  className={styles.ava}
+                ></img>
+              </div>
+              <div>
+                {user.followed ? (
+                  <button
+                    onClick={() => {
+                      this.props.unfollow(user.id);
+                    }}
+                  >
+                    Unfollow
+                  </button>
+                ) : (
+                  <button
+                    onClick={() => {
+                      this.props.follow(user.id);
+                    }}
+                  >
+                    Follow
+                  </button>
+                )}
+              </div>
+            </span>
+            <span>
+              <span>
+                <div>{user.name}</div>
+                <div>{user.status}</div>
+              </span>
+              <span>
+                <div>{"user.location.country"}</div>
+                <div>{"user.location.city"}</div>
+              </span>
+            </span>
+          </div>
+        ))}
+      </div>
+    );
+  }
 }
 export default Users;
