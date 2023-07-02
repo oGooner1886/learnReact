@@ -2,7 +2,8 @@ const FOLLOW_USER = "FOLLOW-USER";
 const UNFOLLOW_USER = "UNFOLLOW-USER";
 const SET_USERS = "SET-USERS";
 const SET_CURRENT_PAGE = "SET-CURRENT-PAGE";
-const SET_TOTAL_USERS_COUNT = "SET-TOTAL-USERS-COUNT"
+const SET_TOTAL_USERS_COUNT = "SET-TOTAL-USERS-COUNT";
+const SWITCHER_IS_FETCHING = "SWITCHER-IS-FETCHING";
 
 const initialState = {
   users: [
@@ -30,8 +31,9 @@ const initialState = {
     // },
   ],
   pageSize: 100,
-  totalUsersCount: 1,
-  currentPage: 1,
+  totalUsersCount: 10,
+  currentPage: 3,
+  isFetching: false,
 };
 
 const usersReducer = (state = initialState, action) => {
@@ -70,7 +72,12 @@ const usersReducer = (state = initialState, action) => {
     case SET_TOTAL_USERS_COUNT:
       return {
         ...state,
-        totalUsersCount: action.totalUsersCount, 
+        totalUsersCount: action.totalUsersCount,
+      };
+    case SWITCHER_IS_FETCHING:
+      return {
+        ...state,
+        isFetching: action.isFetching,
       };
 
     default:
@@ -84,7 +91,17 @@ export const unfollowActionCreator = (userId) => ({
   userId,
 });
 export const setUsersActionCreator = (users) => ({ type: SET_USERS, users });
-export const setCurrentPageActionCreator = (currentPage) => ({type: SET_CURRENT_PAGE, currentPage})
-export const setUsersTotalCountActionCreator = (totalUsersCount) => ({type: SET_TOTAL_USERS_COUNT, totalUsersCount})
+export const setCurrentPageActionCreator = (currentPage) => ({
+  type: SET_CURRENT_PAGE,
+  currentPage,
+});
+export const setUsersTotalCountActionCreator = (totalUsersCount) => ({
+  type: SET_TOTAL_USERS_COUNT,
+  totalUsersCount,
+});
+export const switcherIsFetchingActionCreator = (isFetching) => ({
+  type: SWITCHER_IS_FETCHING,
+  isFetching,
+});
 
 export default usersReducer;

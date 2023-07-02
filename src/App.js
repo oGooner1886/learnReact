@@ -1,8 +1,6 @@
 import "./App.css";
 
-import ContentProfile from "./components/ContentProfile/ContentProfile";
 import Header from "./components/Header/Header";
-import Messages from "./components/Messages/Messages";
 import Navigation from "./components/Nav/Navigation";
 import Music from "./components/Music/Music";
 import News from "./components/News/News";
@@ -11,6 +9,7 @@ import Settings from "./components/Settings/Settings";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import MessagesContainer from "./components/Messages/MessagesContainer";
 import UsersContainer from "./components/Users/UsersContainer";
+import ContentProfileContainer from "./components/ContentProfile/ContentProfileContainer";
 
 function App(props) {
   return (
@@ -20,9 +19,9 @@ function App(props) {
         <Navigation />
         <Routes>
           <Route
-            path="/profile"
+            path="/profile*"
             element={
-              <ContentProfile
+              <ContentProfileContainer
               // profilePage={props.state.profilePage}
               // dispatch={props.dispatch}
               // store={props.store}

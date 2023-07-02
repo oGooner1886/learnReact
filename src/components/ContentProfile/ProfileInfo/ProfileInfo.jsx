@@ -1,30 +1,26 @@
 import s from "./ProfileInfo.module.css";
-import cover from "./2-Inverno-min.jpg"
-const ProfileInfo = () => {
+import cover from "./2-Inverno-min.jpg";
+import avatar from "../../../assets/images/avatar.jpg"
+import Preloader from "../../common/Preloader/Preloader";
+const ProfileInfo = (props) => {
+  if(!props.profile){
+    return <Preloader/>
+  }
   return (
     <div className={s.profileHeader}>
       <div className={s.ownerPageCover}>
-        <img
-          className={s.content_background}
-          src={cover}
-        ></img>
+        <img className={s.content_background} src={cover}></img>
       </div>
-      <div className={s.profileHeader_info}>
-        
-      </div>
-
-
-
-
-
-
+      <div className={s.profileHeader_info}></div>
       Main content
       <div>
-        <img
-          className={s.avatar}
-          src="https://i.pinimg.com/736x/7c/bb/a2/7cbba2effcfb2c4d74c7e55aedf54077.jpg"
-        ></img>
-        Description
+        <img className={s.avatar} src={props.profile.photos.large}></img>
+        <blockquote style={{display: 'inline'}}>{props.profile.aboutMe}</blockquote>
+        {/* <img className={s.avatar} src={avatar}></img> */}
+        
+        
+        
+        
       </div>
     </div>
   );
