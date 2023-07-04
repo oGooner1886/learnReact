@@ -12,6 +12,10 @@
   filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
 }
 
+.login-block {
+  
+}
+
 .header_search {
   position: relative;
   margin: 25px;
@@ -40,7 +44,7 @@
 .header_toolbar {
   
   display: grid;
-  grid-template-columns: repeat(3, 60px);
+  grid-template-columns: repeat(4, 60px);
   justify-content: end;
   align-items: center;
 }

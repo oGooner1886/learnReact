@@ -3,11 +3,13 @@ import search_ico from './img/Ellipse.svg'
 import notification_ico from './img/ico-notifications.svg'
 import settings_ico from './img/Settings.svg'
 import lightMode_ico from './img/Toggle Off1.svg'
+import { NavLink } from 'react-router-dom';
 
 
-const Header = () => {
+const Header = (props) => {
     return (
         <header className = {s.header}>
+            
             
                 <div className={s.header_search}>
                     <img className={s.search_ico} src={search_ico} />
@@ -23,10 +25,15 @@ const Header = () => {
                     <div className={s.toolbar_lightMode}>
                         <img className={s.toolbar_ico} src={lightMode_ico} />
                     </div>
+                    <span className={s.login_block}>
+                        {props.isAuth ? props.login :
+                        <NavLink to={'/login'}>Login</NavLink>}
+                    </span>
 
                 </div>
             
         </header>
+        
     )
 }
 
