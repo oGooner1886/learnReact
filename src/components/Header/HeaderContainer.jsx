@@ -32,7 +32,6 @@ const HeaderContainer = (props) => {
 }
 
 const mapStateToProps = (state) => {
-  debugger
   return{
     isAuth: state.auth.isAuth,
     login: state.auth.login,
