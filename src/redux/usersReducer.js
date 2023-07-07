@@ -4,6 +4,7 @@ const SET_USERS = "SET-USERS";
 const SET_CURRENT_PAGE = "SET-CURRENT-PAGE";
 const SET_TOTAL_USERS_COUNT = "SET-TOTAL-USERS-COUNT";
 const SWITCHER_IS_FETCHING = "SWITCHER-IS-FETCHING";
+const SWITCHER_IS_FOLLOWING_PROGRESS = "SWITCHER-IS-FOLLOWING-PROGRESS"
 
 const initialState = {
   users: [
@@ -31,9 +32,11 @@ const initialState = {
     // },
   ],
   pageSize: 100,
-  totalUsersCount: 10,
-  currentPage: 3,
+  totalUsersCount: 0,
+  currentPage: 1,
   isFetching: false,
+  isFollowingProgress: [],
+
 };
 
 const usersReducer = (state = initialState, action) => {
@@ -79,6 +82,11 @@ const usersReducer = (state = initialState, action) => {
         ...state,
         isFetching: action.isFetching,
       };
+    case SWITCHER_IS_FOLLOWING_PROGRESS:
+      return {
+        ...state,
+        isFollowingProgress: action.isFetching ? [...state.isFollowingProgress, action.userId] : state.isFollowingProgress.filter(id => id != action.userId),
+      };
 
     default:
       return state;
@@ -102,6 +110,11 @@ export const setUsersTotalCountActionCreator = (totalUsersCount) => ({
 export const switcherIsFetchingActionCreator = (isFetching) => ({
   type: SWITCHER_IS_FETCHING,
   isFetching,
+});
+export const switcherIsFollowingProgressActionCreator = (isFetching, userId) => ({
+  type: SWITCHER_IS_FOLLOWING_PROGRESS,
+  isFetching,
+  userId
 });
 
 export default usersReducer;

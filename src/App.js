@@ -30,6 +30,16 @@ function App(props) {
             }
           />
           <Route
+            path="/profile/"
+            element={
+              <ContentProfileContainer
+              // profilePage={props.state.profilePage}
+              // dispatch={props.dispatch}
+              // store={props.store}
+              />
+            }
+          />
+          <Route
             path="/message"
             element={
               <MessagesContainer

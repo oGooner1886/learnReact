@@ -5,12 +5,15 @@ import {
   setUsersActionCreator,
   setUsersTotalCountActionCreator,
   switcherIsFetchingActionCreator,
+  switcherIsFollowingProgressActionCreator,
   unfollowActionCreator,
 } from "../../redux/usersReducer";
 import Users from "./Users";
 import axios from "axios";
 import React from "react";
 import Preloader from "../common/Preloader/Preloader";
+// import { getUsers } from "../../api/api";
+import { usersAPI } from './../../api/api';
 
 class UsersContainer extends React.Component {
   // constructor(props) {
@@ -18,27 +21,27 @@ class UsersContainer extends React.Component {
   // }
   componentDidMount() {
     this.props.switcherIsFetching(true);
-    axios
-      .get(
-        `https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`, { withCredentials: true }
-      )
-      .then((response) => {
+    // axios
+    //   .get(
+    //     `https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`,
+    //     { withCredentials: true }
+    //   )
+    usersAPI.getUsers(this.props.currentPage, this.props.pageSize)
+      .then((data) => {
         this.props.switcherIsFetching(false);
-        this.props.setUsers(response.data.items);
+        this.props.setUsers(data.items);
+        this.props.setTotalUsersCount(data.totalCount);
       });
   }
 
   onPageChanged = (pageNumber) => {
     this.props.setCurrentPage(pageNumber);
     this.props.switcherIsFetching(true);
-    axios
-      .get(
-        `https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&count=${this.props.pageSize}`, { withCredentials: true }
-      )
-      .then((response) => {
+    usersAPI.getUsers(pageNumber, this.props.pageSize)
+      .then((data) => {
         this.props.switcherIsFetching(false);
-        this.props.setUsers(response.data.items);
-        this.props.setTotalUsersCount(response.data.totalCount);
+        this.props.setUsers(data.items);
+        
       });
   };
 
@@ -55,6 +58,9 @@ class UsersContainer extends React.Component {
             users={this.props.users}
             unfollow={this.props.unfollow}
             follow={this.props.follow}
+            switcherIsFollowingProgress={this.props.switcherIsFollowingProgress}
+            isFollowingProgress={this.props.isFollowingProgress}
+            
           />
         </span>
       </>
@@ -70,6 +76,7 @@ const mapStateToProps = (state) => {
     totalUsersCount: state.usersPage.totalUsersCount,
     currentPage: state.usersPage.currentPage,
     isFetching: state.usersPage.isFetching,
+    isFollowingProgress: state.usersPage.isFollowingProgress
   };
 };
 
@@ -99,10 +106,12 @@ const mapStateToProps = (state) => {
 };*/
 
 export default connect(mapStateToProps, {
-  follow:followActionCreator,
-  unfollow:unfollowActionCreator,
-  setUsers:setUsersActionCreator,
-  setCurrentPage:setCurrentPageActionCreator,
+  follow: followActionCreator,
+  unfollow: unfollowActionCreator,
+  setUsers: setUsersActionCreator,
+  setCurrentPage: setCurrentPageActionCreator,
   setTotalUsersCount: setUsersTotalCountActionCreator,
-  switcherIsFetching:switcherIsFetchingActionCreator,
+  switcherIsFetching: switcherIsFetchingActionCreator,
+  switcherIsFollowingProgress: switcherIsFollowingProgressActionCreator
+
 })(UsersContainer);
