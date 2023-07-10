@@ -1,9 +1,11 @@
-import { combineReducers, configureStore, createStore } from '@reduxjs/toolkit'
+import { applyMiddleware, combineReducers, configureStore, createStore } from '@reduxjs/toolkit'
 import profileReducer from './profileReducer';
 import messageReducer from './messageReducer';
 import sidebarReducer from './sidebarReducer';
 import usersReducer from './usersReducer';
 import authReducer from './authReducer';
+import thunkMiddleware from 'redux-thunk';
+
 
 
 // const reducer = {
@@ -22,7 +24,7 @@ const reducers = combineReducers({
 })
 
 
-const store = createStore(reducers)
+const store = createStore(reducers, applyMiddleware(thunkMiddleware))
 
 window.store = store
 export default store

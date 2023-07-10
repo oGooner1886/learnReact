@@ -3,8 +3,11 @@ import styles from "./Users.module.css";
 import ava from "../../assets/images/ava_default.png";
 import { NavLink } from "react-router-dom";
 import axios from "axios";
+import { usersAPI } from "../../api/api";
+import { unfollowThunk } from "../../redux/usersReducer";
+import { followThunk } from "./../../redux/usersReducer";
 
-const API_KEY = "37d349cc-830f-45b2-b4ad-6b8cd4a02319"
+const API_KEY = "37d349cc-830f-45b2-b4ad-6b8cd4a02319";
 
 const Users = (props) => {
   const pagesCount = Math.ceil(props.totalUsersCount / props.pageSize);
@@ -16,6 +19,7 @@ const Users = (props) => {
     <div>
       <div>
         {pages.map((page) => {
+          
           return (
             <span
               className={props.currentPage === page ? styles.selectedPage : ""}
@@ -42,41 +46,23 @@ const Users = (props) => {
             </div>
             <div>
               {user.followed ? (
-                <button disabled={props.isFollowingProgress.some(id => id === user.id)}
+                <button
+                  disabled={props.isFollowingProgress.some(
+                    (id) => id === user.id
+                  )}
                   onClick={() => {
-                    props.switcherIsFollowingProgress(true, user.id)
-                    axios
-                      .delete(
-                        `https://social-network.samuraijs.com/api/1.0//follow/${user.id}`,
-                        { withCredentials: true }
-                      )
-                      .then((response) => {
-                        if(response.data.resultCode == 0) {
-                        props.unfollow(user.id);
-                        
-                      }
-                      props.switcherIsFollowingProgress(false, user.id)
-                      });
+                    props.unfollowThunk(user.id);
                   }}
                 >
                   Unfollow
                 </button>
               ) : (
-                <button disabled={props.isFollowingProgress.some(id => id === user.id)}
+                <button
+                  disabled={props.isFollowingProgress.some(
+                    (id) => id === user.id
+                  )}
                   onClick={() => {
-                    props.switcherIsFollowingProgress(true, user.id)
-                    axios
-                      .post(
-                        `https://social-network.samuraijs.com/api/1.0//follow/${user.id}`,
-                        {}, {withCredentials: true}
-                      )
-                      .then((response) => {
-                        if(response.data.resultCode == 0) {
-                          props.follow(user.id);
-                        }
-                        props.switcherIsFollowingProgress(false, user.id)
-                      });
-                    
+                    props.followThunk(user.id);
                   }}
                 >
                   Follow

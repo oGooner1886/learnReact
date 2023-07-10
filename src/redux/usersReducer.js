@@ -1,10 +1,12 @@
+import { usersAPI } from "../api/api";
+
 const FOLLOW_USER = "FOLLOW-USER";
 const UNFOLLOW_USER = "UNFOLLOW-USER";
 const SET_USERS = "SET-USERS";
 const SET_CURRENT_PAGE = "SET-CURRENT-PAGE";
 const SET_TOTAL_USERS_COUNT = "SET-TOTAL-USERS-COUNT";
 const SWITCHER_IS_FETCHING = "SWITCHER-IS-FETCHING";
-const SWITCHER_IS_FOLLOWING_PROGRESS = "SWITCHER-IS-FOLLOWING-PROGRESS"
+const SWITCHER_IS_FOLLOWING_PROGRESS = "SWITCHER-IS-FOLLOWING-PROGRESS";
 
 const initialState = {
   users: [
@@ -36,7 +38,6 @@ const initialState = {
   currentPage: 1,
   isFetching: false,
   isFollowingProgress: [],
-
 };
 
 const usersReducer = (state = initialState, action) => {
@@ -85,36 +86,77 @@ const usersReducer = (state = initialState, action) => {
     case SWITCHER_IS_FOLLOWING_PROGRESS:
       return {
         ...state,
-        isFollowingProgress: action.isFetching ? [...state.isFollowingProgress, action.userId] : state.isFollowingProgress.filter(id => id != action.userId),
+        isFollowingProgress: action.isFetching
+          ? [...state.isFollowingProgress, action.userId]
+          : state.isFollowingProgress.filter((id) => id != action.userId),
       };
 
     default:
       return state;
   }
 };
-
-export const followActionCreator = (userId) => ({ type: FOLLOW_USER, userId });
-export const unfollowActionCreator = (userId) => ({
+//! ACTION CREATOR
+export const follow = (userId) => ({ type: FOLLOW_USER, userId });
+export const unfollow = (userId) => ({
   type: UNFOLLOW_USER,
   userId,
 });
-export const setUsersActionCreator = (users) => ({ type: SET_USERS, users });
-export const setCurrentPageActionCreator = (currentPage) => ({
+export const setUsers = (users) => ({ type: SET_USERS, users });
+export const setCurrentPage = (currentPage) => ({
   type: SET_CURRENT_PAGE,
   currentPage,
 });
-export const setUsersTotalCountActionCreator = (totalUsersCount) => ({
+export const setUsersTotalCount = (totalUsersCount) => ({
   type: SET_TOTAL_USERS_COUNT,
   totalUsersCount,
 });
-export const switcherIsFetchingActionCreator = (isFetching) => ({
+export const switcherIsFetching = (isFetching) => ({
   type: SWITCHER_IS_FETCHING,
   isFetching,
 });
-export const switcherIsFollowingProgressActionCreator = (isFetching, userId) => ({
+export const switcherIsFollowingProgress = (isFetching, userId) => ({
   type: SWITCHER_IS_FOLLOWING_PROGRESS,
   isFetching,
-  userId
+  userId,
 });
+
+//! -THUNK-
+export const getUsersThunk = (currentPage, pageSize) => {
+  return (dispatch) => {
+    dispatch(switcherIsFetching(true));
+
+    usersAPI.getUsers(currentPage, pageSize).then((data) => {
+      dispatch(switcherIsFetching(false));
+      dispatch(setUsers(data.items));
+      dispatch(setUsersTotalCount(data.totalCount));
+    });
+  };
+};
+export const followThunk = (userId) => {
+  return (dispatch) => {
+    dispatch(switcherIsFollowingProgress(true, userId));
+    usersAPI
+      .follow(userId)
+      .then((response) => {
+        if (response.data.resultCode == 0) {
+          dispatch(follow(userId))
+        }
+        dispatch(switcherIsFollowingProgress(false, userId));
+      });
+  };
+};
+export const unfollowThunk = (userId) => {
+  return (dispatch) => {
+    dispatch(switcherIsFollowingProgress(true, userId));
+    usersAPI
+      .unfollow(userId)
+      .then((response) => {
+        if (response.data.resultCode == 0) {
+          dispatch(unfollow(userId))
+        }
+        dispatch(switcherIsFollowingProgress(false, userId));
+      });
+  };
+};
 
 export default usersReducer;
