@@ -2,6 +2,8 @@ import s from "./Messages.module.css";
 import MessageItem from "./MessageItem/MessageItem";
 import UserItem from "./UserItem/UserItem";
 import { sendMessageCreator, updateNewMessageBodyCreator } from './../../redux/messageReducer';
+import { Navigate } from "react-router-dom";
+
 const Messages = (props) => {
   
   const state = props.messagePage
@@ -26,7 +28,10 @@ const Messages = (props) => {
   const onSendMessageClick = () => {
     props.sendMessage()
   }
-
+  
+  // if(!props.isAuth){
+  //   return <Navigate to={"/login"}/>
+  // }
   return (
     <div className={s.message}>
       <div className={s.messageUsers}>{usersElements}</div>

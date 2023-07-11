@@ -4,6 +4,7 @@ import {
   updateNewMessageBodyCreator,
 } from "../../redux/messageReducer";
 import Messages from "./Messages";
+import { withAuthRedirect } from "../../hoc/withAuthRedirect";
 
 // const Message1sContainer = (props) => {
 //   const state = props.store.getState().messagePage;
@@ -28,9 +29,10 @@ import Messages from "./Messages";
 const mapStateToProps = (state) => {
   return {
     messagePage: state.messagePage,
+    isAuth: state.auth.isAuth
   };
 };
-
+const AuthRedirectComponent = withAuthRedirect(Messages)
 const mapDispatchToProps = (dispatch) => {
   return {
     sendMessage: () => {
@@ -42,6 +44,6 @@ const mapDispatchToProps = (dispatch) => {
   }
 }
 
-const MessagesContainer = connect(mapStateToProps, mapDispatchToProps)(Messages)
+const MessagesContainer = connect(mapStateToProps, mapDispatchToProps)(AuthRedirectComponent)
 
 export default MessagesContainer;

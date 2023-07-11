@@ -2,6 +2,7 @@ import s from "./ProfileInfo.module.css";
 import cover from "./2-Inverno-min.jpg";
 import avatar from "../../../assets/images/avatar.jpg";
 import Preloader from "../../common/Preloader/Preloader";
+
 const ProfileInfo = (props) => {
   if (!props.profile) {
     return <Preloader />;
@@ -10,6 +11,7 @@ const ProfileInfo = (props) => {
   //   return 
   //   <img className={s.avatar} src={avatar}></img>;
   // }
+  
 
   return (
     <div className={s.profileHeader}>
