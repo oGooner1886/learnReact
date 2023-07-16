@@ -20,9 +20,23 @@ export const usersAPI = {
     return example.delete(`follow/${userId}`);
   },
   getContentProfile(userId, currentUserId) {
+    return profileAPI.getContentProfile(userId, currentUserId)
+  },
+
+};
+
+export const profileAPI = {
+  getContentProfile(userId, currentUserId){
     return example.get(`profile/` + currentUserId);
   },
-};
+  getStatus(userId, currentUserId){
+    return example.get(`profile/status/` + currentUserId)
+  },
+  updateStatus(status){
+    return example.put(`profile/status/`, {status})
+  }
+}
+
 
 export const authAPI = {
   getlogin() {

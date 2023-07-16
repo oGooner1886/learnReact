@@ -5,45 +5,35 @@ import {
 } from "../../redux/messageReducer";
 import Messages from "./Messages";
 import { withAuthRedirect } from "../../hoc/withAuthRedirect";
-
-// const Message1sContainer = (props) => {
-//   const state = props.store.getState().messagePage;
-
-//   const onNewMessageChange = (body) => {
-//     props.store.dispatch(updateNewMessageBodyCreator(body));
-//   };
-
-//   const onSendMessageClick = () => {
-//     props.store.dispatch(sendMessageCreator());
-//   };
-
-//   return (
-//     <Messages
-//       updateNewMessageBody={onNewMessageChange}
-//       sendMessage={onSendMessageClick}
-//       messagePage={state}
-//     />
-//   );
-// };
+import { compose } from "redux";
 
 const mapStateToProps = (state) => {
   return {
     messagePage: state.messagePage,
-    isAuth: state.auth.isAuth
+    // isAuth: state.auth.isAuth,
   };
 };
-const AuthRedirectComponent = withAuthRedirect(Messages)
+
+const AuthRedirectComponent = withAuthRedirect(Messages); //!HOC
+
 const mapDispatchToProps = (dispatch) => {
   return {
     sendMessage: () => {
-      dispatch(sendMessageCreator())
+      dispatch(sendMessageCreator());
     },
     updateNewMessageBody: (body) => {
       dispatch(updateNewMessageBodyCreator(body));
     },
-  }
-}
+  };
+};
 
-const MessagesContainer = connect(mapStateToProps, mapDispatchToProps)(AuthRedirectComponent)
 
-export default MessagesContainer;
+
+// const MessagesContainer = connect(mapStateToProps, mapDispatchToProps)(AuthRedirectComponent);
+
+// export default MessagesContainer;
+
+export default compose(
+  connect(mapStateToProps, mapDispatchToProps),
+  withAuthRedirect
+)(Messages)

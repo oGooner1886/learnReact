@@ -29,9 +29,6 @@ const Messages = (props) => {
     props.sendMessage()
   }
   
-  // if(!props.isAuth){
-  //   return <Navigate to={"/login"}/>
-  // }
   return (
     <div className={s.message}>
       <div className={s.messageUsers}>{usersElements}</div>

@@ -5,9 +5,11 @@ import ProfileInfo from "./ProfileInfo/ProfileInfo";
 import store from './../../redux/reduxStore';
 
 const ContentProfile = (props) => {
+  
+  
   return (
     <div className={s.content}>
-      <ProfileInfo profile={props.profile}/>
+      <ProfileInfo profile={props.profile} status={props.status} updateStatus={props.updateStatus}/>
       <MyPostsContainer 
         // store = {props.store}
         // posts={props.profilePage.posts}
