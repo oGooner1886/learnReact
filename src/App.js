@@ -20,6 +20,16 @@ function App(props) {
         <HeaderContainer />
         <Navigation />
         <Routes>
+        <Route
+            path="/profile/"
+            element={
+              <ContentProfileContainer
+              // profilePage={props.state.profilePage}
+              // dispatch={props.dispatch}
+              // store={props.store}
+              />
+            }
+          />
           <Route
             path="/profile/:userId"
             element={
@@ -30,16 +40,7 @@ function App(props) {
               />
             }
           />
-          <Route
-            path="/profile/"
-            element={
-              <ContentProfileContainer
-              // profilePage={props.state.profilePage}
-              // dispatch={props.dispatch}
-              // store={props.store}
-              />
-            }
-          />
+          
           <Route
             path="/message"
             element={

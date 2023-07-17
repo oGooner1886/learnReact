@@ -1,8 +1,9 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useLayoutEffect } from "react";
 import s from "./ProfileInfo.module.css";
 // import Preloader from "../../common/Preloader/Preloader";
 
 const ProfileStatus = (props) => {
+  //! props -> status, updateStatus
   const [changeStatus, setChangeStatus] = useState(false);
   const [title, setTitle] = useState(props.status);
 
@@ -11,13 +12,15 @@ const ProfileStatus = (props) => {
   };
 
   const offChangeStatus = () => {
-    props.updateStatus(props.status);
+    props.updateStatus(title);
     setChangeStatus(false);
   };
 
   useEffect(() => {
     setTitle(props.status);
   }, [props.status]);
+
+  // useLayoutEffect(() => {});
 
   const onChangeSetTitle = (event) => setTitle(event.currentTarget.value);
 
@@ -38,3 +41,14 @@ const ProfileStatus = (props) => {
 };
 
 export default ProfileStatus;
+
+class One {
+  constructor() {}
+
+}
+
+const Two = new One();
+One.prototype.name = "Hello"
+console.log(Two);
+console.log(Two.__proto__ === One.prototype);
+

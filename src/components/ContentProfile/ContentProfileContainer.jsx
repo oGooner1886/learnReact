@@ -12,7 +12,7 @@ import { updateStatus, getStatus } from './../../redux/profileReducer';
 // 22.11
 const ContentProfileContainer = (props) => {
   const { userId } = useParams();
-  const currentUserId = userId || 2;
+  const currentUserId = userId || 29441;
 
   useEffect(() => {
     props.getUserProfileThunk(userId, currentUserId);
@@ -41,5 +41,5 @@ const mapStateToProps = (state) => {
 
 export default compose(
   connect(mapStateToProps, {getUserProfileThunk, getStatus, updateStatus}),
-  withAuthRedirect
+  // withAuthRedirect
 )(ContentProfileContainer)
