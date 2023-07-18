@@ -1,13 +1,16 @@
 import s from "./Messages.module.css";
 import MessageItem from "./MessageItem/MessageItem";
 import UserItem from "./UserItem/UserItem";
-import { sendMessageCreator, updateNewMessageBodyCreator } from './../../redux/messageReducer';
+import {
+  sendMessageCreator,
+  updateNewMessageBodyCreator,
+} from "./../../redux/messageReducer";
 import { Navigate } from "react-router-dom";
+import { MessagesReduxForm } from "./MessagesForm";
 
 const Messages = (props) => {
-  
-  const state = props.messagePage
-  
+  const state = props.messagePage;
+
   const usersElements = state.users.map((user) => (
     <UserItem name={user.name} id={user.id} />
   ));
@@ -16,32 +19,39 @@ const Messages = (props) => {
     <MessageItem value={message.value} />
   ));
 
-  
-  const newMessageBody = state.newMessageBody
+  const newMessageBody = state.newMessageBody;
 
   const onNewMessageChange = (event) => {
-    const body = event.target.value
-    props.updateNewMessageBody(body)
+    const body = event.target.value;
+    props.updateNewMessageBody(body);
     // props.store.dispatch(updateNewMessageBodyCreator(body))
-  }
+  };
 
   const onSendMessageClick = () => {
-    props.sendMessage()
-  }
-  
+    props.sendMessage();
+  };
+
+  const onSubmit = (formData) => {
+    console.log(formData);
+  };
   return (
     <div className={s.message}>
       <div className={s.messageUsers}>{usersElements}</div>
-      <div className={s.messageDialogs}>
-        {messagesElements}
-        <div>
+      <div>
+        <div className={s.messageDialogs}>{messagesElements}</div>
+        <MessagesReduxForm onSubmit={onSubmit} />
+        {/* <div>
           <div>
-            <textarea placeholder="Enter your message" value={newMessageBody} onChange={onNewMessageChange}></textarea>
+            <textarea
+              placeholder="Enter your message"
+              value={newMessageBody}
+              onChange={onNewMessageChange}
+            ></textarea>
           </div>
           <div>
             <button onClick={onSendMessageClick}>Send</button>
           </div>
-        </div>
+        </div> */}
       </div>
     </div>
   );
@@ -49,3 +59,6 @@ const Messages = (props) => {
 
 export default Messages;
 
+{
+  /* <MessagesReduxForm onSubmit={onSubmit}/> */
+}
