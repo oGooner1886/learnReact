@@ -2,9 +2,8 @@ import { Field, reduxForm } from "redux-form";
 import s from "./Messages.module.css";
 
 const MessagesForm = (props) => {
-  debugger;
   return (
-    <form onSubmit={props.handleSubmit}>
+   
       <div>
         <div>
           <Field
@@ -19,9 +18,9 @@ const MessagesForm = (props) => {
           <button onClick={props.onSendMessageClick}>Send</button>
         </div>
       </div>
-    </form>
+    
   );
 };
-export const MessagesReduxForm = reduxForm({ form: "message" })(MessagesForm);
+export const MessagesReduxForm = reduxForm({ form: "messageForm" })(MessagesForm);
 
 // export default MessagesForm;

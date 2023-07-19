@@ -1,12 +1,7 @@
 import s from "./Messages.module.css";
 import MessageItem from "./MessageItem/MessageItem";
 import UserItem from "./UserItem/UserItem";
-import {
-  sendMessageCreator,
-  updateNewMessageBodyCreator,
-} from "./../../redux/messageReducer";
-import { Navigate } from "react-router-dom";
-import { MessagesReduxForm } from "./MessagesForm";
+import { Field, reduxForm } from "redux-form";
 
 const Messages = (props) => {
   const state = props.messagePage;
@@ -19,46 +14,42 @@ const Messages = (props) => {
     <MessageItem value={message.value} />
   ));
 
-  const newMessageBody = state.newMessageBody;
-
-  const onNewMessageChange = (event) => {
-    const body = event.target.value;
-    props.updateNewMessageBody(body);
-    // props.store.dispatch(updateNewMessageBodyCreator(body))
+  const addNewMessage = (values) => {
+    props.sendMessage(values.message);
   };
 
-  const onSendMessageClick = () => {
-    props.sendMessage();
-  };
-
-  const onSubmit = (formData) => {
-    console.log(formData);
-  };
+  const MessagesReduxForm = reduxForm({ form: "messageForm" })(MessagesForm);
   return (
-    <div className={s.message}>
-      <div className={s.messageUsers}>{usersElements}</div>
-      <div>
-        <div className={s.messageDialogs}>{messagesElements}</div>
-        <MessagesReduxForm onSubmit={onSubmit} />
-        {/* <div>
-          <div>
-            <textarea
-              placeholder="Enter your message"
-              value={newMessageBody}
-              onChange={onNewMessageChange}
-            ></textarea>
-          </div>
-          <div>
-            <button onClick={onSendMessageClick}>Send</button>
-          </div>
-        </div> */}
+    
+      <div className={s.message}>
+        <div className={s.messageUsers}>{usersElements}</div>
+        <div>
+          <div className={s.messageDialogs}>{messagesElements}</div>
+          <MessagesReduxForm onSubmit={addNewMessage} />
+        </div>
       </div>
-    </div>
+  
+  );
+};
+
+const MessagesForm = (props) => {
+  return (
+    <form onSubmit={props.handleSubmit}>
+      <div>
+        <div>
+          <Field
+            placeholder="Enter your message"
+            name={"message"}
+            component={"textarea"}
+          />
+        </div>
+        <div>
+          <button>Send</button>
+        </div>
+      </div>
+      </form>
+    
   );
 };
 
 export default Messages;
-
-{
-  /* <MessagesReduxForm onSubmit={onSubmit}/> */
-}
