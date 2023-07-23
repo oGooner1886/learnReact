@@ -15,7 +15,7 @@ const authReducer = (state = initialState, action) => {
       return {
         ...state,
         ...action.data,
-        isAuth: true,
+        // isAuth: true,
       };
 
     default:
@@ -23,9 +23,9 @@ const authReducer = (state = initialState, action) => {
   }
 };
 
-export const setAuthUserDataActionCreator = (userId, email, login) => ({
+export const setAuthUserDataActionCreator = (userId, email, login, isAuth) => ({
   type: SET_USER_DATA,
-  data: { userId, email, login },
+  data: { userId, email, login, isAuth },
 });
 
 //! -THUNK-
@@ -34,7 +34,25 @@ export const getAuthUserThunk = () => {
     authAPI.getlogin().then((response) => {
       if (response.data.resultCode === 0) {
         const { id, email, login } = response.data.data;
-        dispatch(setAuthUserDataActionCreator(id, email, login));
+        dispatch(setAuthUserDataActionCreator(id, email, login, true));
+      }
+    });
+  };
+};
+export const postAuthUserThunk = (email, password, rememberMe) => {
+  return (dispatch) => {
+    authAPI.postLogin(email, password, rememberMe).then((response) => {
+      if (response.data.resultCode === 0) {
+        dispatch(getAuthUserThunk());
+      }
+    });
+  };
+};
+export const deleteAuthUserThunk = () => {
+  return (dispatch) => {
+    authAPI.logout().then((response) => {
+      if (response.data.resultCode === 0) {
+        dispatch(setAuthUserDataActionCreator(null, null, null, false));
       }
     });
   };

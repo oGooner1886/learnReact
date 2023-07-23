@@ -2,6 +2,8 @@ import s from "./Messages.module.css";
 import MessageItem from "./MessageItem/MessageItem";
 import UserItem from "./UserItem/UserItem";
 import { Field, reduxForm } from "redux-form";
+import { Textarea } from "../common/FormsControls/FormsControls";
+import { maxLength, required } from "../../utils/validators";
 
 const Messages = (props) => {
   const state = props.messagePage;
@@ -31,7 +33,7 @@ const Messages = (props) => {
   
   );
 };
-
+const maxLength100 = maxLength(100)
 const MessagesForm = (props) => {
   return (
     <form onSubmit={props.handleSubmit}>
@@ -40,7 +42,8 @@ const MessagesForm = (props) => {
           <Field
             placeholder="Enter your message"
             name={"message"}
-            component={"textarea"}
+            component={Textarea}
+            validate={[required, maxLength100]}
           />
         </div>
         <div>

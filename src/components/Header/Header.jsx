@@ -26,7 +26,7 @@ const Header = (props) => {
                         <img className={s.toolbar_ico} src={lightMode_ico} />
                     </div>
                     <span className={s.login_block}>
-                        {props.isAuth ? props.login :
+                        {props.isAuth ? <div>{props.login} - <button onClick={props.deleteAuthUserThunk}>Logout</button> </div>:
                         <NavLink to={'/login'}>Login</NavLink>}
                     </span>
 

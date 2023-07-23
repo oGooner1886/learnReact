@@ -13,7 +13,7 @@
 }
 
 .login-block {
-  
+
 }
 
 .header_search {
@@ -44,9 +44,13 @@
 .header_toolbar {
   
   display: grid;
-  grid-template-columns: repeat(4, 60px);
+  grid-template-columns: repeat(4, 100px);
   justify-content: end;
   align-items: center;
+  width: 700px;
+}
+.header_toolbar:last-child{
+  
 }
 
 .toolbar_notification{

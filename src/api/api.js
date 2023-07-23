@@ -42,4 +42,10 @@ export const authAPI = {
   getlogin() {
     return example.get(`auth/me`);
   },
+  postLogin(email, password, rememberMe) {
+    return example.post(`auth/login`, {email, password, rememberMe});
+  },
+  logout() {
+    return example.delete(`auth/login`);
+  },
 };
