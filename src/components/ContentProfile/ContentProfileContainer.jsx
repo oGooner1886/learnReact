@@ -12,7 +12,8 @@ import { updateStatus, getStatus } from './../../redux/profileReducer';
 // 22.11
 const ContentProfileContainer = (props) => {
   const { userId } = useParams();
-  const currentUserId = userId || 29441;
+  
+  const currentUserId = userId || props.authUserId;
 
   useEffect(() => {
     props.getUserProfileThunk(userId, currentUserId);
@@ -28,8 +29,9 @@ const AuthRedirectComponent = withAuthRedirect(ContentProfileContainer)
 const mapStateToProps = (state) => {
   return {
     profile: state.profilePage.profile,
-    status: state.profilePage.status
-    // isAuth: state.auth.isAuth,
+    status: state.profilePage.status,
+    isAuth: state.auth.isAuth,
+    authUserId: state.auth.userId
   };
 };
 

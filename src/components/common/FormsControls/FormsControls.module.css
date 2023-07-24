@@ -12,3 +12,8 @@ outline-offset: -2px;
 {
     color: red;
 }
+.authError{
+    border: 1px red solid;
+    color: red;
+    padding: 5px;
+}
